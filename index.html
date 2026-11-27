@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Breltz ReturnIQ — Returns Intelligence</title>
+<style>
+:root{--ink:#17231f;--muted:#68756f;--line:#e5ebe7;--bg:#f5f7f5;--card:#fff;--green:#187b5b;--green2:#e8f4ee;--amber:#a96b12;--amberbg:#fff5e4;--red:#b34a43;--redbg:#fff0ee;--nav:#13241e}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font:14px/1.45 Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Arial;color:var(--ink)}
+.app{display:grid;grid-template-columns:235px 1fr;min-height:100vh}.sidebar{background:var(--nav);color:#eaf2ed;padding:24px 16px;display:flex;flex-direction:column;gap:22px}
+.brand{font-size:19px;font-weight:750;letter-spacing:-.4px}.brand small{display:block;font-size:11px;color:#9bb4a8;font-weight:500;letter-spacing:1.4px;margin-top:3px}
+.workspace{font-size:11px;color:#9bb4a8;text-transform:uppercase;letter-spacing:1px;margin:4px 10px}
+nav{display:grid;gap:6px}nav button{border:0;background:transparent;color:#c6d5cd;text-align:left;padding:11px 12px;border-radius:9px;font:inherit;cursor:pointer}nav button.active,nav button:hover{background:#29463a;color:white}
+.sidebar .note{margin-top:auto;color:#9bb4a8;font-size:11px;border-top:1px solid #294238;padding-top:14px}
+main{padding:28px 34px;max-width:1440px;width:100%;margin:auto}.top{display:flex;justify-content:space-between;align-items:center;gap:20px;margin-bottom:24px}.eyebrow{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1.2px;font-weight:700}.top h1{font-size:25px;letter-spacing:-.8px;margin:4px 0}.sub{color:var(--muted);margin:0}.period{border:1px solid var(--line);background:white;padding:9px 12px;border-radius:9px;color:var(--muted)}
+.view{display:none}.view.active{display:block}.grid{display:grid;gap:14px}.kpis{grid-template-columns:repeat(4,minmax(0,1fr));margin-bottom:16px}.card{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:17px;box-shadow:0 1px 2px #10291a05}.klabel{font-size:12px;color:var(--muted)}.kvalue{font-size:27px;font-weight:750;letter-spacing:-1px;margin:7px 0 2px}.hint{font-size:11px;color:var(--muted)}.positive{color:var(--green)}.warning{color:var(--amber)}.negative{color:var(--red)}
+.cols{grid-template-columns:1.2fr .8fr}.card h3{font-size:14px;margin:0 0 13px}.barrow{display:grid;grid-template-columns:100px 1fr 48px;gap:10px;align-items:center;margin:12px 0;font-size:12px}.track{height:9px;background:#edf1ee;border-radius:20px;overflow:hidden}.fill{height:100%;border-radius:20px;background:#39896b}.fill.warn{background:#d4a24f}.fill.red{background:#c86d63}.callout{padding:12px;border-radius:10px;background:var(--amberbg);color:#80530f;font-size:12px;margin-top:12px}.goodcall{background:var(--green2);color:#216345}
+table{width:100%;border-collapse:collapse;font-size:12px}th{text-align:left;color:var(--muted);font-weight:600;background:#f8faf8}td,th{padding:11px 9px;border-bottom:1px solid var(--line)}tr:last-child td{border-bottom:0}.pill{display:inline-block;padding:4px 8px;border-radius:20px;font-size:10px;font-weight:700;background:#edf2ef;color:#52645b}.pill.red{background:var(--redbg);color:var(--red)}.pill.amber{background:var(--amberbg);color:var(--amber)}.pill.green{background:var(--green2);color:var(--green)}
+.actions{display:grid;gap:10px}.action{display:flex;gap:12px;align-items:flex-start;border:1px solid var(--line);border-radius:10px;padding:13px}.dot{width:9px;height:9px;border-radius:50%;margin-top:5px;background:#c58b35;flex:none}.action strong{display:block;font-size:12px}.action p{margin:3px 0 0;color:var(--muted);font-size:11px}.btn{border:0;background:var(--green);color:white;border-radius:8px;padding:9px 12px;font-weight:650;cursor:pointer}.btn.secondary{background:#edf4ef;color:#285c45}.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}.filters select,.filters input{border:1px solid var(--line);border-radius:8px;background:white;padding:9px;color:var(--ink)}
+.chart{height:175px;display:flex;align-items:end;gap:12px;padding:14px 6px 0;border-bottom:1px solid var(--line)}.chart .col{flex:1;text-align:center;font-size:10px;color:var(--muted)}.chart .bar{margin:0 auto 7px;width:min(38px,80%);border-radius:6px 6px 0 0;background:#5c9d7d}.chart .bar.alt{background:#d7a04b}
+.tabs{display:flex;gap:6px;margin:0 0 14px}.tabs button{background:white;border:1px solid var(--line);padding:8px 11px;border-radius:8px;color:var(--muted);cursor:pointer}.tabs button.active{background:var(--green2);border-color:#b7d7c5;color:var(--green);font-weight:700}
+.emptyhint{color:var(--muted);font-size:11px;margin-top:10px}.footer{color:var(--muted);font-size:10px;margin-top:20px}
+@media(max-width:850px){.app{grid-template-columns:1fr}.sidebar{padding:14px;gap:12px}.sidebar nav{grid-template-columns:repeat(3,1fr)}.workspace,.sidebar .note{display:none}main{padding:20px 14px}.kpis{grid-template-columns:repeat(2,1fr)}.cols{grid-template-columns:1fr}.top{align-items:flex-start;flex-direction:column}}
+</style></head>
+<body><div class="app">
+<aside class="sidebar">
+<div class="brand">breltz <small>RETURNS INTELLIGENCE</small></div>
+<div class="workspace">Workspace</div>
+<nav>
+<button class="active" data-view="overview">▦ &nbsp; Overview</button>
+<button data-view="products">◫ &nbsp; Products & channels</button>
+<button data-view="campaigns">↗ &nbsp; Campaigns</button>
+<button data-view="voice">☷ &nbsp; Customer voice</button>
+<button data-view="actions">◎ &nbsp; Action centre</button>
+</nav>
+<div class="note">ReturnIQ concept prototype<br>Sample figures are illustrative unless explicitly marked as discovery-call facts.</div>
+</aside>
+<main>
+<div class="top"><div><div class="eyebrow">Breltz Bags / Operations intelligence</div><h1 id="pageTitle">Returns overview</h1><p class="sub" id="pageSub">See where returns happen, why they happen and what to fix first.</p></div><div class="period">◷ &nbsp; Last 30 days ▾</div></div>
+
+<section class="view active" id="overview">
+<div class="grid kpis">
+<div class="card"><div class="klabel">Website customer-initiated returns</div><div class="kvalue">21–22%</div><div class="hint">Discovery-call baseline · target below 12%</div></div>
+<div class="card"><div class="klabel">Contribution margin</div><div class="kvalue">9%</div><div class="hint negative">Down from 22% two years ago</div></div>
+<div class="card"><div class="klabel">Overall returns dashboard</div><div class="kvalue">~30%</div><div class="hint">Includes RTO — not comparable to customer returns</div></div>
+<div class="card"><div class="klabel">Contribution margin goal</div><div class="kvalue">18%</div><div class="hint">Six-month ambition stated by CEO</div></div>
+</div>
+<div class="grid cols">
+<div class="card"><h3>Customer-initiated return rate by channel</h3>
+<div class="barrow"><span>Website</span><div class="track"><div class="fill warn" style="width:69%"></div></div><b>21–22%</b></div>
+<div class="barrow"><span>Amazon</span><div class="track"><div class="fill" style="width:44%"></div></div><b>13–14%</b></div>
+<div class="barrow"><span>Myntra</span><div class="track"><div class="fill red" style="width:100%"></div></div><b>31%</b></div>
+<div class="callout">Myntra is the highest-return channel in the call. Its Commuter listing may still show old product images and a 30L title. Validate and correct the listing first.</div>
+<div class="emptyhint">Rates are approximate figures stated by Operations during the discovery call.</div>
+</div>
+<div class="card"><h3>What the business needs to answer</h3>
+<div class="actions">
+<div class="action"><span class="dot"></span><div><strong>Which products and variants create avoidable returns?</strong><p>Break down by SKU, colour, channel and customer type.</p></div></div>
+<div class="action"><span class="dot"></span><div><strong>Which campaigns generate kept orders?</strong><p>Join campaign and creative data to order outcomes and returns.</p></div></div>
+<div class="action"><span class="dot"></span><div><strong>What can we fix before dispatch or return?</strong><p>Correct product claims, improve fit information and support customers early.</p></div></div>
+</div></div></div>
+</section>
+
+<section class="view" id="products">
+<div class="filters"><select><option>All channels</option><option>Website</option><option>Amazon</option><option>Myntra</option></select><select><option>All products</option><option>Commuter 28L</option><option>Voyager 40L</option></select><select><option>All colours</option><option>Black</option><option>Sage Green</option><option>Dusty Rose</option></select></div>
+<div class="card"><h3>Product & channel return signals</h3><table><thead><tr><th>Product / variant</th><th>Signal from call</th><th>Evidence</th><th>Next step</th></tr></thead><tbody>
+<tr><td><b>Commuter 28L</b></td><td><span class="pill amber">High volume</span></td><td>Most returned in absolute numbers</td><td>Segment by reason and creative</td></tr>
+<tr><td><b>Commuter Sage / Dusty Rose</b></td><td><span class="pill red">High rate (reported)</span></td><td>Colour mismatch complaints</td><td>Compare ad imagery with true colour</td></tr>
+<tr><td><b>Voyager 40L</b></td><td><span class="pill amber">Investigate</span></td><td>Among highest return percentages</td><td>Analyse variant-level reasons</td></tr>
+<tr><td><b>School bags</b></td><td><span class="pill green">Low returns</span></td><td>Rarely returned; repeat buyers common</td><td>Study repeat-customer journey</td></tr>
+</tbody></table><div class="callout">Hypothesis to validate: better product context and customer familiarity may reduce expectation mismatch. Do not assume channel differences are causal.</div></div>
+</section>
+
+<section class="view" id="campaigns">
+<div class="grid kpis">
+<div class="card"><div class="klabel">Monthly marketing spend</div><div class="kvalue">₹45–48L</div><div class="hint">Discovery-call estimate</div></div>
+<div class="card"><div class="klabel">Meta reported ROAS</div><div class="kvalue">3.2×</div><div class="hint">Purchase event; return outcome not sent back</div></div>
+<div class="card"><div class="klabel">Commuter share of website revenue</div><div class="kvalue">~30%</div><div class="hint">Hero product</div></div>
+<div class="card"><div class="klabel">Order source coverage</div><div class="kvalue">~40%</div><div class="hint">Orders with a proper source in Shopify, per Growth</div></div>
+</div>
+<div class="card"><h3>Campaign performance — concept view</h3><table><thead><tr><th>Creative</th><th>Reported signal</th><th>Return concern</th><th>Decision</th></tr></thead><tbody>
+<tr><td><b>Riya “what's in my bag”</b></td><td>Top-performing UGC</td><td>Bag scale / laptop size may set wrong expectation</td><td><span class="pill amber">Audit before scaling</span></td></tr>
+<tr><td><b>“Fits up to 16-inch”</b></td><td>Top carousel</td><td>Official spec is 15.6-inch; 16-inch is tight</td><td><span class="pill red">Correct claim</span></td></tr>
+<tr><td><b>Ananya Dusty Rose reel</b></td><td>Top partnership ad</td><td>Warm sunset filter may alter colour perception</td><td><span class="pill amber">Review colour accuracy</span></td></tr>
+</tbody></table><div class="callout">Return-adjusted ROAS is not yet calculated. The prototype shows the analysis the product should enable once order, campaign and return records are reliably joined.</div></div>
+</section>
+
+<section class="view" id="voice">
+<div class="grid cols">
+<div class="card"><h3>Complaint themes to capture</h3>
+<div class="barrow"><span>Size / fit</span><div class="track"><div class="fill" style="width:90%"></div></div><b>Theme</b></div>
+<div class="barrow"><span>Colour mismatch</span><div class="track"><div class="fill" style="width:70%"></div></div><b>Theme</b></div>
+<div class="barrow"><span>Quality / damage</span><div class="track"><div class="fill" style="width:35%"></div></div><b>Theme</b></div>
+<div class="emptyhint">Qualitative themes mentioned in the call, not measured frequencies.</div></div>
+<div class="card"><h3>Example feedback → structured insight</h3>
+<table><tr><th>Customer wording</th><th>Tag</th></tr><tr><td>“My laptop doesn't fit properly”</td><td><span class="pill amber">Laptop fit</span></td></tr><tr><td>“Smaller than I expected”</td><td><span class="pill amber">Size expectation</span></td></tr><tr><td>“Colour looks more grey”</td><td><span class="pill">Colour accuracy</span></td></tr><tr><td>“Looked bigger in the video”</td><td><span class="pill">Creative mismatch</span></td></tr></table></div>
+</div>
+<div class="card" style="margin-top:14px"><h3>Suggested reason-capture flow</h3><p class="sub">Replace the broad “Didn't like the product” option with a guided reason and optional detail.</p>
+<div class="filters"><select id="reason"><option>Select primary reason</option><option>Size / capacity smaller than expected</option><option>Laptop compartment fit</option><option>Colour differs from expectation</option><option>Product differs from listing / ad</option><option>Quality / damage</option><option>Other</option></select><input id="detail" placeholder="Optional: add context"></div><button class="btn" onclick="alert('Prototype only: reason captured locally for demonstration.')">Preview reason capture</button></div>
+</section>
+
+<section class="view" id="actions">
+<div class="card"><h3>Recommended actions</h3><p class="sub">Prioritised by likely customer impact and implementation effort. Validate with pilot data.</p><div class="actions" style="margin-top:15px">
+<div class="action"><span class="dot" style="background:#b34a43"></span><div><strong>1. Correct the Commuter laptop-size claim</strong><p>Change “up to 16-inch” to the verified 15.6-inch specification and show a real fit demonstration.</p><p><span class="pill red">High priority</span> Owner: Growth + Product</p></div></div>
+<div class="action"><span class="dot" style="background:#b34a43"></span><div><strong>2. Fix the Myntra Commuter listing</strong><p>Replace legacy images and correct the 30L title after confirming current catalogue specifications.</p><p><span class="pill red">High priority</span> Owner: Marketplace team</p></div></div>
+<div class="action"><span class="dot"></span><div><strong>3. Improve colour representation</strong><p>Review influencer filters and add consistent real-world colour references for Sage Green and Dusty Rose.</p><p><span class="pill amber">Medium priority</span> Owner: Creative + CX</p></div></div>
+<div class="action"><span class="dot"></span><div><strong>4. Join orders, returns and customer conversations</strong><p>Use Shopify order ID as the join key; resolve missing IDs and standardise return-reason taxonomy.</p><p><span class="pill amber">Foundation</span> Owner: Data + Operations</p></div></div>
+<div class="action"><span class="dot" style="background:#39896b"></span><div><strong>5. Test proactive fit support</strong><p>Offer a short laptop-fit guide or CX assistance for customers who view compatibility information or contact support.</p><p><span class="pill green">Experiment</span> Owner: CX</p></div></div>
+</div></div>
+<div class="card" style="margin-top:14px"><h3>Success scorecard</h3><table><tr><th>Metric</th><th>Baseline from call</th><th>Target / measurement</th></tr><tr><td>Website customer-initiated return rate</td><td>21–22%</td><td>Below 12% in two quarters</td></tr><tr><td>Contribution margin</td><td>9%</td><td>At least 18% in six months</td></tr><tr><td>Return-adjusted campaign contribution</td><td>Not available</td><td>Establish baseline, then improve</td></tr><tr><td>Reason-code coverage / order linkage</td><td>Fragmented</td><td>Track linked-order and categorised-reason coverage</td></tr></table></div>
+</section>
+<div class="footer">Concept prototype for the Hawky.ai PM / FDE assignment · Figures are sourced from the discovery call where labelled; all other visual elements are illustrative, not live Breltz data.</div>
+</main></div>
+<script>
+const titles={overview:["Returns overview","See where returns happen, why they happen and what to fix first."],products:["Products & channels","Find the products, variants and channels that need investigation."],campaigns:["Campaign intelligence","Move from purchase ROAS to return-adjusted campaign decisions."],voice:["Customer voice","Turn disconnected customer conversations into structured evidence."],actions:["Action centre","Convert root-cause signals into owners, interventions and measurable outcomes."]};
+document.querySelectorAll("nav button").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll("nav button").forEach(x=>x.classList.remove("active"));b.classList.add("active");document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));document.getElementById(b.dataset.view).classList.add("active");document.getElementById("pageTitle").textContent=titles[b.dataset.view][0];document.getElementById("pageSub").textContent=titles[b.dataset.view][1];}));
+</script></body></html>
